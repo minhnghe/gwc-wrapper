@@ -1,10 +1,12 @@
 ﻿using GreateRewardsService.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -18,7 +20,7 @@ namespace GreateRewardsService.Controllers
 {
     public class PaymentController : ApiController
     {
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public async Task<object> SendTxnReq()
         {
             try
@@ -133,19 +135,27 @@ namespace GreateRewardsService.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("Endpoint")]
-        public void GetResponse(string data)
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("Endpoint")]
+        public async Task GetResponse()
         {
             try
             {
-                System.Console.WriteLine(data);
+                string body = await Request.Content.ReadAsStringAsync();
+
+                if (!File.Exists("d:\\logs\\sample.txt"))
+                {
+                    File.Create("d:\\logs\\sample.txt");
+                }
+                File.AppendAllText("d:\\logs\\sample.txt", body + "\r\n");
+                return;
             }
             catch (Exception)
             {
 
             }
         }
+
 
     }
 }
