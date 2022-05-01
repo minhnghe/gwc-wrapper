@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Runtime.Caching;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -18,6 +19,16 @@ namespace GreateRewardsService.Controllers
         public async Task<object> IssueDigitalVoucher(IssueDigitalVoucherRequestModel model)
         {
             return await RequestHelper<IssueDigitalVoucherRequestModel>.Post(model, Constants.Urls.Vendor.IssueDigitalVoucher);
+        }
+
+        [HttpPost]
+        [Route(Constants.Urls.Vendor.IssueDigitalVoucherCache)]
+        public string IssueDigitalVoucherCache(IssueDigitalVoucherRequestModel model)
+        {
+            MemoryCache cache = MemoryCache.Default;
+            string key = Guid.NewGuid().ToString();
+            cache.Add(key, model, DateTimeOffset.Now.AddHours(5));
+            return key;
         }
 
         [HttpPost]

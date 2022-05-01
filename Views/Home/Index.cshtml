@@ -1,24 +1,101 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+<style>
+    body {
+        margin: 0;
+        padding: 15px 0 0 0;
+        min-height: 100vh;
+        /* background: linear-gradient(
+              21.19deg,
+              rgba(241, 236, 221, 0.43) 26.7%,
+              rgba(233, 229, 219, 0.24) 88.38%
+            ); */
+        background: linear-gradient( 21.19deg, rgb(236 233 226 / 44%) 52%, rgb(212 209 201 / 33%) 80% );
+    }
+
+    #anotherSection, #anotherSection fieldset {
+        border: none !important;
+    }
+
+    #anotherSection {
+        padding: 0 5px;
+    }
+
+    .back-button {
+        width: 64px;
+        height: 44px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        font-size: 18px;
+        line-height: 1;
+        transition: 0.3s;
+    }
+
+    .gradient-text {
+        background: linear-gradient(69.12deg, #a90069 1.98%, #ec008c 75.87%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        text-fill-color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
+<div onclick="goBack(this)" class="back-button">
+    <i class="fas fa-chevron-left gradient-text"></i>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
+<div id="anotherSection">
+    <fieldset>
+        <div id="ajaxResponse"></div>
+    </fieldset>
 </div>
+
+<script src="@ViewBag.Domain/GW2/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="@ViewBag.Domain/GW2/pluginpages/env.jsp"></script>
+<script type="text/javascript" src="@ViewBag.Domain/GW2/js/apps.js"></script>
+<script>
+    window.onload = function () {
+        var txnReq = '@ViewBag.TxnReq'.split('&quot;').join('"');
+        var keyId = '@ViewBag.KeyId';
+        var hmac = '@ViewBag.Hmac'
+        if (txnReq && txnReq != "") {
+
+            sendPayLoad(txnReq, hmac, keyId);
+        }
+        if ('@ViewBag.Status' != "") {
+            if ('@ViewBag.Status' == 'Success')
+                success();
+            else
+                fail();
+        }
+    };
+
+
+    $('#ajaxResponse').on('DOMSubtreeModified', function () {
+
+        const btnCancel = $('#btnCancel');
+
+        if (btnCancel && btnCancel.length) {
+            btnCancel.hide();
+        }
+    });
+
+    function goBack(btn) {
+        btn.style.opacity = "0.7";
+        window.ReactNativeWebView.postMessage("goBack");
+    }
+
+    function success() {
+        window.ReactNativeWebView.postMessage("success");
+    }
+
+    function fail() {
+        window.ReactNativeWebView.postMessage("fail");
+    }
+</script>

@@ -5,14 +5,14 @@ using System.Web;
 
 namespace GreateRewardsService.Models
 {
-    public class TxnRes
+    public class TxnRes1
     {
         public string KeyId { get; set; }
         public string Hmac { get; set; }
         public string Message { get; set; }
     }
 
-    public class Message
+    public class TxnRes
     {
         public string Ss { get; set; }
         public Msg Msg { get; set; }
@@ -38,5 +38,6 @@ namespace GreateRewardsService.Models
         public string TxnRand { get; set; }
         public string ActionCode { get; set; }
         public string NetsMidIndicator { get; set; }
+        public string B2sTxnEndURLParam { get; set; }
     }
 }
