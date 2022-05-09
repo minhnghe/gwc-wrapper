@@ -318,6 +318,7 @@
     <Compile Include="ClientAuthorize.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CarParkController.cs" />
+    <Compile Include="Controllers\CRMController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\GreateRewardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -325,6 +326,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CRM\AuthResponse.cs" />
+    <Compile Include="Models\CRM\BaseCRM.cs" />
+    <Compile Include="Models\CRM\MemberEnquiry.cs" />
+    <Compile Include="Models\CRM\PostDataModel.cs" />
+    <Compile Include="Models\CRM\RewardCampaign.cs" />
+    <Compile Include="Models\CRM\UpdateProfile.cs" />
     <Compile Include="Models\RequestModels\CarPark\AddTicketRequestModel.cs" />
     <Compile Include="Models\RequestModels\ENets\ENets.cs" />
     <Compile Include="Models\RequestModels\ENets\TxnReqModel.cs" />
@@ -352,6 +359,7 @@
     <Compile Include="Models\RequestModels\GreateRewards\UtilizeRewardsRequestModel.cs" />
     <Compile Include="Models\RequestModels\GreateRewards\ValidateOtpRequestModel.cs" />
     <Compile Include="Models\ResponseModels\AuthenticateResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\AuthResponse.cs" />
     <Compile Include="Models\ResponseModels\BaseResponseModel.cs" />
     <Compile Include="Models\ResponseModels\DigitalVouchersResponseModel.cs" />
     <Compile Include="Models\ResponseModels\EvoucherEncryptedStringResponseModel.cs" />

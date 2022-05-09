@@ -1,17 +1,13 @@
 ﻿using GreateRewardsService.Models;
 using GreateRewardsService.Models.RequestModels;
-using GreateRewardsService.Models.ResponseModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Caching;
 using System.Web.Mvc;
 
 namespace GreateRewardsService.Controllers
@@ -30,12 +26,12 @@ namespace GreateRewardsService.Controllers
                 {
                     string message = HttpUtility.UrlDecode(Request.Form[0]);
                     TxnRes txnRes = JsonConvert.DeserializeObject<TxnRes>(message);
-                    if (type == "vouchers")
+                    if (type == "vouchers" && txnRes.Msg.NetsTxnStatus == "0")
                     {
                         IssueDigitalVoucherRequestModel model = cache.Get(txnRes.Msg.B2sTxnEndURLParam) as IssueDigitalVoucherRequestModel;
                         object res = await RequestHelper<IssueDigitalVoucherRequestModel>.Post(model, Constants.Urls.Vendor.IssueDigitalVoucher);
                         JObject obj = JObject.Parse(res.ToString());
-                        ViewBag.Status = Convert.ToBoolean(obj["success"]) && txnRes.Msg.NetsTxnStatus == "0" ? "Success" : "Failed";
+                        ViewBag.Status = Convert.ToBoolean(obj["success"]) ? "Success" : "Failed";
                     }
 
                     return View();

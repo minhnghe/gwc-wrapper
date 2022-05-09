@@ -24,6 +24,14 @@
             public const string ENETS_PaymentMode = "ENETS_PaymentMode";
             public const string ENETS_Environment = "ENETS_Environment";
             public const string CarPark_EndPointPrefix = "CarPark_EndPointPrefix";
+            public const string CRM_TokenURL = "CRM_TokenURL";
+            public const string CRM_InstanceURL = "CRM_InstanceURL";
+            public const string CRM_GrantType = "CRM_GrantType";
+            public const string CRM_ClientID = "CRM_ClientID";
+            public const string CRM_ClientSecret = "CRM_ClientSecret";
+            public const string CRM_Scope = "CRM_Scope";
+            public const string SoapAction = "SoapAction";
+            public const string Origin = "Origin";
 
         }
 
@@ -142,6 +150,17 @@
                     public const string S2sTxnEndURL = "<s2sTxnEndURL>";
                 }
             }
+        }
+
+        public class Command
+        {
+            public const string MEMBER_AUTHENTICATION = "MEMBER AUTHENTICATION";
+            public const string MEMBER_ENQUIRY = "MEMBER ENQUIRY";
+            public const string GET_CUSTOM_CODES = "GET CUSTOM CODES";
+            public const string GET_VOUCHERS = "GET VOUCHERS";
+            public const string VOUCHER_REDEMPTION = "VOUCHER REDEMPTION";
+            public const string REWARD_CAMPAIGN = "REWARD CAMPAIGN";
+            public const string UPDATE_PROFILE3 = "UPDATE PROFILE3";
         }
     }
 }

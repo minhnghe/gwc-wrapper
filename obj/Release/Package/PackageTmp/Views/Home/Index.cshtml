@@ -6,6 +6,7 @@
 <style>
     body {
         margin: 0;
+        padding: 15px 0 0 0;
         min-height: 100vh;
         /* background: linear-gradient(
               21.19deg,
@@ -62,6 +63,7 @@
     window.onload = function () {
         var txnReq = '@ViewBag.TxnReq'.split('&quot;').join('"');
         var keyId = '@ViewBag.KeyId';
+        var hmac = '@ViewBag.Hmac'
         if (txnReq && txnReq != "") {
 
             sendPayLoad(txnReq, hmac, keyId);
